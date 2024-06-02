@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./assets/css/style.css">
+        <script src="./assets/js/script.js" defer></script>
+        <title>Jogo da velha</title>
+    </head>
+    <body>
+        <div id="container">
+            <h1>Jogo da velha</h1>
+    
+            <div class="container-area">
+                <div class="area">
+                    <div data-item="a1" class="item b r"></div>
+                    <div data-item="a2" class="item b r"></div>
+                    <div data-item="a3" class="item b"></div>
+        
+                    <div data-item="b1" class="item b r"></div>
+                    <div data-item="b2" class="item b r"></div>
+                    <div data-item="b3" class="item b"></div>
+        
+                    <div data-item="c1" class="item r"></div>
+                    <div data-item="c2" class="item r"></div>
+                    <div data-item="c3" class="item"></div>
+                </div>
+                <div class="block-area"></div>
+            </div>
+    
+            <div class="info">
+                <div class="info-player turn">--</div>
+                <div class="info-result">--</div>
+                <img class="trophy" src="./assets/images/trophy.png" alt="trophy">
+            </div>
+    
+            <button class="reset">Novo jogo</button>
+        </div>
+    </body>
+</html>

@@ -16,6 +16,10 @@
     opacity: 1 !important;
 }
 
+.width {
+    width: 100% !important;
+}
+
 body {
     display: flex;
     min-height: 100vh;
@@ -58,6 +62,29 @@ h1 {
     position: absolute;
     top: 0;
 }
+
+.line {
+    width: 0;
+    height: 1px;
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform-origin: left center;
+    transition: width 1s ease;
+}
+/* 
+.line {
+    width: 300px;
+    height: 1px;
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: left center;
+    transition: width .3s ease;
+} */
 
 .area .item {
     width: 100px;

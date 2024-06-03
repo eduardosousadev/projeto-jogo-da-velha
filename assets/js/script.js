@@ -8,11 +8,21 @@ let playerTurn = "";
 let player = "";
 let warning = "";
 let playing = false;
-let clicks = 0;
+let numberOfClicks = 0;
+let hasLine = false;
 
 // Functions
 function reset() {
-    if(clicks === 0) {
+    if(hasLine) {
+        document.querySelector(".line").style.setProperty("display", "none", "important");
+        document.querySelector(".line").style.setProperty("width", "0px", "important");
+        setTimeout(() => {
+            document.querySelector(".line").style.setProperty("display", "inline", "important");
+        },1000);
+        hasLine = false;
+    };
+
+    if(numberOfClicks === 0) {
         toggleBoard();
         classList(".info-result", ".info-player", ".trophy")
         warning = "";
@@ -43,7 +53,7 @@ function reset() {
         renderBoard();
         renderInformation();
     };
-    clicks++
+    numberOfClicks++
 };
 
 function renderBoard() {
@@ -93,27 +103,57 @@ function checkGame() {
         classList(".info-player", ".info-result");
         playing = false;
     };
-    clicks = 0;
+    numberOfClicks = 0;
 };
 
 function checkWinnerFor(player) {
     let possibilities = [
-        "a1,a2,a3",
-        "b1,b2,b3",
-        "c1,c2,c3",
+        "a1,a2,a3", 
+        "b1,b2,b3", 
+        "c1,c2,c3", 
 
-        "a1,b1,c1",
-        "a2,b2,c2",
-        "a3,b3,c3",
+        "a1,b1,c1", 
+        "a2,b2,c2", 
+        "a3,b3,c3", 
 
-        "a1,b2,c3",
-        "a3,b2,c1"
+        "a1,b2,c3", 
+        "a3,b2,c1"  
     ];
+
+    const possibility1 = ['a1', 'a2', 'a3'];
+    const possibility2 = ['b1', 'b2', 'b3'];
+    const possibility3 = ['c1', 'c2', 'c3'];
+    const possibility4 = ['a1', 'b1', 'c1'];
+    const possibility5 = ['a2', 'b2', 'c2'];
+    const possibility6 = ['a3', 'b3', 'c3'];
+    const possibility7 = ['a1', 'b2', 'c3'];
+    const possibility8 = ['a3', 'b2', 'c1'];
 
     for(let possibility in possibilities) {
         let newArrayOfPossibility = possibilities[possibility].split(",");
         let hasWon = newArrayOfPossibility.every(item => board[item] == player); 
-        if(hasWon) return true;     
+
+        if(hasWon) {
+            if(JSON.stringify(newArrayOfPossibility) === JSON.stringify(possibility1)) {
+                styleLine("300px", "18%", "5px", "0deg");
+            } else if(JSON.stringify(newArrayOfPossibility) === JSON.stringify(possibility2)) {
+                styleLine("300px", "50%", "5px", "0deg");
+            } else if(JSON.stringify(newArrayOfPossibility) === JSON.stringify(possibility3)) {
+                styleLine("300px", "83%", "5px", "0deg");
+            } else if(JSON.stringify(newArrayOfPossibility) === JSON.stringify(possibility4)) {
+                styleLine("300px", "5px", "17%", "90deg");
+            } else if(JSON.stringify(newArrayOfPossibility) === JSON.stringify(possibility5)) {
+                styleLine("300px", "5px", "50%", "90deg");
+            } else if(JSON.stringify(newArrayOfPossibility) === JSON.stringify(possibility6)) {
+                styleLine("300px", "5px", "82%", "90deg");
+            } else if(JSON.stringify(newArrayOfPossibility) === JSON.stringify(possibility7)) {
+                styleLine("425px", "5px", "5px", "45deg");
+            } else if(JSON.stringify(newArrayOfPossibility) === JSON.stringify(possibility8)) {
+                styleLine("425px", "5px", "305px", "135deg");
+            }
+            hasLine = true;
+            return true; 
+        };
     };
 
     return false;
@@ -138,6 +178,15 @@ function classList(selector1, selector2, selector3) {
 function toggleBoard() {
     document.querySelector(".block-area").classList.toggle("z-index");
     document.querySelector(".area").classList.toggle("opacity");
+};
+
+function styleLine(widthValue, topValue, leftValue, rotateValue) {
+    const lineDiv = document.querySelector(".line");
+
+    lineDiv.style.setProperty("width", widthValue, "important");
+    lineDiv.style.setProperty("top", topValue, "important");
+    lineDiv.style.setProperty("left", leftValue, "important");
+    lineDiv.style.setProperty("rotate", rotateValue, "important");
 };
 
 // Events

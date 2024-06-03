@@ -8,24 +8,42 @@ let playerTurn = "";
 let player = "";
 let warning = "";
 let playing = false;
+let clicks = 0;
 
 // Functions
 function reset() {
-    toggleBoard();
-    classList(".info-result", ".info-player", ".trophy")
-    warning = "";
-
-    // Generating number between 0 and 1
-    let random = Math.floor(Math.random() * 2);
-
-    playerTurn = random === 0 ? "X" : "O";
+    if(clicks === 0) {
+        toggleBoard();
+        classList(".info-result", ".info-player", ".trophy")
+        warning = "";
     
-    for(let i in board) board[i] = "";
-
-    playing = true;
-
-    renderBoard();
-    renderInformation();
+        // Generating number between 0 and 1
+        let random = Math.floor(Math.random() * 2);
+    
+        playerTurn = random === 0 ? "X" : "O";
+        
+        for(let i in board) board[i] = "";
+    
+        playing = true;
+    
+        renderBoard();
+        renderInformation();
+    } else {
+        warning = "";
+    
+        // Generating number between 0 and 1
+        let random = Math.floor(Math.random() * 2);
+    
+        playerTurn = random === 0 ? "X" : "O";
+        
+        for(let i in board) board[i] = "";
+    
+        playing = true;
+    
+        renderBoard();
+        renderInformation();
+    };
+    clicks++
 };
 
 function renderBoard() {
@@ -75,6 +93,7 @@ function checkGame() {
         classList(".info-player", ".info-result");
         playing = false;
     };
+    clicks = 0;
 };
 
 function checkWinnerFor(player) {
@@ -111,8 +130,9 @@ function isFull() {
 function classList(selector1, selector2, selector3) {
     document.querySelector(selector1).classList.add("hide");
     document.querySelector(selector2).classList.remove("hide");
-    // document.querySelector(selector3).classList.toggle("hide");
-    if(!isFull() || (isFull() && warning !== "Jogo empatado!")) document.querySelector(selector3).classList.toggle("hide");
+    if(!isFull() || (isFull() && warning !== "Jogo empatado!")) {
+        document.querySelector(selector3).classList.toggle("hide");
+    };
 };
 
 function toggleBoard() {
